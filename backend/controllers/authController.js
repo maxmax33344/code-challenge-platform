@@ -10,8 +10,13 @@ const generateToken = (id) => {
 const registerUser = async (req, res) => {
     const { name, email, password } = req.body;
     try {
+        if (!name) return res.status(400).json({ message: 'Please provide username' });
         const userExists = await User.findOne({ email });
         if (userExists) return res.status(400).json({ message: 'User already exists' });
+        if (name.length < 4) return res.status(400).json({ message: 'Username must be 4 characters or longer'});
+        if (!email) return res.status(400).json({ message: 'Please provide email'});
+        if (!password) return res.status(400).json({ message: 'Please provide password'});        
+        if (password.length < 12 ) return res.status(400).json({ message: 'Password must be 12 characters or longer'});       
 
         const user = await User.create({ name, email, password });
         res.status(201).json({ id: user.id, name: user.name, email: user.email, token: generateToken(user.id) });
