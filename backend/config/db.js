@@ -1,3 +1,5 @@
+//fixing SRV record DNS resolution
+require("node:dns/promises").setServers(["1.1.1.1", "8.8.8.8"]);
 // config/db.js
 const mongoose = require("mongoose");
 
