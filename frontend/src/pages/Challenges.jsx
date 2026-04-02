@@ -15,7 +15,6 @@ const Challenges = () => {
         const response = await axiosInstance.get('/api/challenges', {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-        //console.log("DATA:", response.data);
         setChallenges(response.data);
       } catch (error) {
         alert('Failed to fetch challenges.');
@@ -27,12 +26,14 @@ const Challenges = () => {
 
   return (
     <div className="container mx-auto p-6">
-      <ChallengeForm
+      {user?.role === 'admin' && (
+        <ChallengeForm
         challenges={challenges}
         setChallenges={setChallenges}
         editingChallenge={editingChallenge}
         setEditingChallenge={setEditingChallenge}
       />
+      )}
       <ChallengeList challenges={challenges} setChallenges={setChallenges} setEditingChallenge={setEditingChallenge} />
     </div>
   );
