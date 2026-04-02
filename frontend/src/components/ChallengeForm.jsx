@@ -18,7 +18,7 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
         unitTestSet: editingChallenge.unitTestSet,
         difficulty: editingChallenge.difficulty,
         category: editingChallenge.category,
-        releaseDate: editingChallenge.releaseDate
+        releaseDate: editingChallenge.releaseDate?.split('T')[0]
       });
     } else {
       setFormData({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: '' });
