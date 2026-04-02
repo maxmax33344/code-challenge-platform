@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const ChallengeForm = ({ challenges, setChallenges, editingChallenge, seteditingChallenge }) => {
+const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditingChallenge }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: ''});
 
@@ -39,7 +39,7 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setediting
         });
         setChallenges([...challenges, response.data]);
       }
-      seteditingChallenge(null);
+      setEditingChallenge(null);
       setFormData({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: '' });
     } catch (error) {
       console.log(error);

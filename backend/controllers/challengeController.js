@@ -32,15 +32,25 @@ const addChallenge = async (req, res) => {
 
 
 const updateChallenge = async (req, res) => {
-    const { title, description, completed, deadline } = req.body;
+    const { name, description, example, sampleInputSet, sampleOutputSet, constraints, unitTestSet, difficulty, category, releaseDate } = req.body;
     try {
         const challenge = await Challenge.findById(req.params.id);
         if (!challenge) return res.status(404).json({ message: 'Challenge not found' });
 
-        challenge.title = title || challenge.title;
+        challenge.name = name || challenge.name;
         challenge.description = description || challenge.description;
-        challenge.completed = completed ?? challenge.completed;
-        challenge.deadline = deadline || challenge.deadline;
+        challenge.example = example || challenge.example;
+        challenge.sampleInputSet = sampleInputSet || challenge.sampleInputSet;
+        challenge.sampleOutputSet = sampleOutputSet || challenge.sampleOutputSet;
+        challenge.constraints = constraints || challenge.constraints;
+        challenge.unitTestSet = unitTestSet || challenge.unitTestSet;
+        challenge.difficulty = difficulty || challenge.difficulty;
+        challenge.category = category || challenge.category;
+        challenge.releaseDate = releaseDate || challenge.releaseDate;
+
+        const today = new Date();
+        const releaseDateObj = new Date(releaseDate);
+        challenge.released = releaseDateObj <= today;
 
         const updatedChallenge = await challenge.save();
         res.json(updatedChallenge);
@@ -61,6 +71,8 @@ const deleteChallenge = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+
+
 
 
 module.exports = { getChallenges, addChallenge, updateChallenge, deleteChallenge };
