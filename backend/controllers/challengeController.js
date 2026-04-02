@@ -10,11 +10,15 @@ const getChallenges = async (req, res) => {
 };
 
 const addChallenge = async (req, res) => {
-    const { title, description, deadline } = req.body;
+    const { name, description, example, sampleInputSet, sampleOutputSet, constraints, unitTestSet, difficulty, category, releaseDate } = req.body;
+    const today = new Date();
+    const releaseDateObj = new Date(releaseDate);
     try {
-        const challenge = await Challenge.create({ userId: req.user.id, title, description, deadline });
+        const released = releaseDateObj <= today;
+        const challenge = await Challenge.create({ name, description, example, sampleInputSet, sampleOutputSet, constraints, unitTestSet, difficulty, category, releaseDate, released });
         res.status(201).json(challenge);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
 };

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditingChallenges }) => {
+const ChallengeForm = ({ challenges, setChallenges, editingChallenge, seteditingChallenge }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: ''});
 
@@ -39,9 +39,10 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
         });
         setChallenges([...challenges, response.data]);
       }
-      setEditingChallenges(null);
+      seteditingChallenge(null);
       setFormData({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: '' });
     } catch (error) {
+      console.log(error);
       alert('Failed to save challenge.');
     }
   };
@@ -108,13 +109,13 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
         className="w-full mb-4 p-2 border rounded"
       >
         <option value="">Select Category</option>
-        <option value="easy">data structure</option>
-        <option value="medium">algorithm</option>
+        <option value="data structure">data structure</option>
+        <option value="algorithm">algorithm</option>
       </select>
       <input
         type="date"
         value={formData.releaseDate}
-        ononChange={(e) => setFormData({ ...formData, releaseDate: e.target.value })}
+        onChange={(e) => setFormData({ ...formData, releaseDate: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />      
       

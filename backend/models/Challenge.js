@@ -6,13 +6,13 @@ const challengeSchema = new mongoose.Schema({
     example: { type: String, required: true },
     sampleInputSet: { type: String, required: true },
     sampleOutputSet: { type: String, required: true },
-    constraints: {type: String},
+    constraints: {type: String, default: null },
     sampleSolution: { type: String},
     unitTestSet: { type: String, required: true },
     difficulty: { type: String, enum: ['easy','medium','hard'], required: true },
-    category: { type: String, required: true },
-    releaseTime: { type: Date, required: true},
-    released: {type: Boolean, required: true, default: false}
+    category: { type: String, enum: ['data structure', 'algorithm'], required: true },
+    releaseDate: { type: Date, required: true},
+    released: {type: Boolean}
 });
 
 module.exports = mongoose.model('Challenge', challengeSchema);
