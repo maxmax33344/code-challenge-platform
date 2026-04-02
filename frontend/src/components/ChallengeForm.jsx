@@ -2,68 +2,124 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
-const ChallengeForm = ({ challenges, setChallengess, editingChallenges, setEditingChallenges }) => {
+const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditingChallenges }) => {
   const { user } = useAuth();
-  const [formData, setFormData] = useState({ title: '', description: '', deadline: '' });
+  const [formData, setFormData] = useState({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: ''});
 
   useEffect(() => {
-    if (editingChallenges) {
+    if (editingChallenge) {
       setFormData({
-        title: editingChallenges.title,
-        description: editingChallenges.description,
-        deadline: editingChallenges.deadline,
+        name: editingChallenge.name,
+        description: editingChallenge.description,
+        example: editingChallenge.example,
+        sampleInputSet: editingChallenge.sampleInputSet,
+        sampleOutputSet: editingChallenge.sampleOutputSet,
+        constraints: editingChallenge.constraints,
+        unitTestSet: editingChallenge.unitTestSet,
+        difficulty: editingChallenge.difficulty,
+        category: editingChallenge.category,
+        releaseDate: editingChallenge.releaseDate
       });
     } else {
-      setFormData({ title: '', description: '', deadline: '' });
+      setFormData({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: '' });
     }
-  }, [editingChallenges]);
+  }, [editingChallenge]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (editingChallenges) {
-        const response = await axiosInstance.put(`/api/challenges/${editingChallenges._id}`, formData, {
+      if (editingChallenge) {
+        const response = await axiosInstance.put(`/api/challenges/${editingChallenge._id}`, formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-        setChallengess(challenges.map((task) => (task._id === response.data._id ? response.data : task)));
+        setChallenges(challenges.map((challenge) => (challenge._id === response.data._id ? response.data : challenge)));
       } else {
         const response = await axiosInstance.post('/api/challenges', formData, {
           headers: { Authorization: `Bearer ${user.token}` },
         });
-        setChallengess([...challenges, response.data]);
+        setChallenges([...challenges, response.data]);
       }
       setEditingChallenges(null);
-      setFormData({ title: '', description: '', deadline: '' });
+      setFormData({ name: '', description: '', example: '', sampleInputSet: '', sampleOutputSet: '', constraints: '', unitTestSet: '', difficulty: '', category: '', releaseDate: '' });
     } catch (error) {
-      alert('Failed to save task.');
+      alert('Failed to save challenge.');
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded mb-6">
-      <h1 className="text-2xl font-bold mb-4">{editingChallenges ? 'Your Form Name: Edit Operation' : 'Your Form Name: Create Operation'}</h1>
+      <h1 className="text-2xl font-bold mb-4">{editingChallenge ? 'Edit Existing Challenge' : 'Create New Challenge'}</h1>
       <input
         type="text"
-        placeholder="Title"
-        value={formData.title}
-        onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+        placeholder="Name"
+        value={formData.name}
+        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
       />
-      <input
-        type="text"
-        placeholder="Description"
+      <textarea
+        placeholder="Enter challenge description"
         value={formData.description}
         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
+        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
+      <textarea
+        placeholder="Enter example"
+        value={formData.example}
+        onChange={(e) => setFormData({ ...formData, example: e.target.value })}
+        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <textarea
+        placeholder="Enter sample input set"
+        value={formData.sampleInputSet}
+        onChange={(e) => setFormData({ ...formData, sampleInputSet: e.target.value })}
+        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <textarea
+        placeholder="Enter sample output set"
+        value={formData.sampleOutputSet}
+        onChange={(e) => setFormData({ ...formData, sampleOutputSet: e.target.value })}
+        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <textarea
+        placeholder="Enter constraints"
+        value={formData.constraints}
+        onChange={(e) => setFormData({ ...formData, constraints: e.target.value })}
+        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <textarea
+        placeholder="Enter unit test"
+        value={formData.unitTestSet}
+        onChange={(e) => setFormData({ ...formData, unitTestSet: e.target.value })}
+        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <select
+        value={formData.difficulty}
+        onChange={(e) => setFormData({ ...formData, difficulty: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      >
+        <option value="">Select Difficulty</option>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+      <select
+        value={formData.category}
+        onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+        className="w-full mb-4 p-2 border rounded"
+      >
+        <option value="">Select Category</option>
+        <option value="easy">data structure</option>
+        <option value="medium">algorithm</option>
+      </select>
       <input
         type="date"
-        value={formData.deadline}
-        onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
+        value={formData.releaseDate}
+        ononChange={(e) => setFormData({ ...formData, releaseDate: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      />      
+      
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
-        {editingChallenges ? 'Update Button' : 'Create Button'}
+        {editingChallenge ? 'Update' : 'Create'}
       </button>
     </form>
   );
