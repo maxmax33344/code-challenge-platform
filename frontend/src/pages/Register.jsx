@@ -15,7 +15,6 @@ const Register = () => {
     } catch (error) {
       //alert('Registration failed. Please try again.');      
       alert(error.response.data.message);
-
     }
   };
 
