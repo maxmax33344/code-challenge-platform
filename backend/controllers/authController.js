@@ -20,8 +20,8 @@ const registerUser = async (req, res) => {
         if (!password) return res.status(400).json({ message: 'Please provide password'});        
         if (password.length < 12 ) return res.status(400).json({ message: 'Password must be 12 characters or longer'});       
 
-        const user = await User.create({ name: valid.escape(name), email: valid.normalizeEmail(email), password: valid.escape(password), roles: 'user' });
-        res.status(201).json({ id: user.id, name: user.name, email: user.email, token: generateToken(user.id) });
+        const user = await User.create({ name: valid.escape(name), email: valid.normalizeEmail(email), password: password, role: 'user' });
+        res.status(201).json({ id: user.id, name: user.name, email: user.email, token: generateToken(user.id), role: user.role });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
 
         const user = await User.findOne({ normalizeEmail });
         if (user && (await bcrypt.compare(sanitizedPassword, user.password))) {
-            res.json({ id: user.id, name: user.name, email: user.email, token: generateToken(user.id), roles: user.roles });
+            res.json({ id: user.id, name: user.name, email: user.email, token: generateToken(user.id), role: user.role });
         } else {
             res.status(401).json({ message: 'Invalid email or password' });
         }
