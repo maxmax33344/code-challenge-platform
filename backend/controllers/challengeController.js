@@ -72,7 +72,21 @@ const deleteChallenge = async (req, res) => {
     }
 };
 
+const hideChallenge = async (req, res) => {
+    try {
+        const challenge = await Challenge.findById(req.params.id);
+        if (!challenge) return res.status(404).json({ message: 'Challenge not found' });
+        challenge.releaseDate = new Date('2999-01-30');
+        challenge.released = false;
+
+        await challenge.save();
+        res.json(challenge);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 
 
-module.exports = { getChallenges, addChallenge, updateChallenge, deleteChallenge };
+
+module.exports = { getChallenges, addChallenge, updateChallenge, deleteChallenge, hideChallenge };
