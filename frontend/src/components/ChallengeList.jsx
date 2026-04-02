@@ -21,7 +21,7 @@ const ChallengeList = ({ challenges, setChallenges, setEditingChallenge }) => {
         <div key={challenge._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
           <h2 className="font-bold">{challenge.title}</h2>
           <p>{challenge.description}</p>
-          <p className="text-sm text-gray-500">Deadline: {new Date(challenge.deadline).toLocaleDateString()}</p>
+          <p className="text-sm text-gray-500">ReleaseDate: {new Date(challenge.releaseDate).toLocaleDateString()}</p>
           <div className="mt-2">
             <button
               onClick={() => setEditingChallenge(challenge)}

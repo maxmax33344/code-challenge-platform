@@ -2,7 +2,14 @@ const Challenge = require('../models/Challenge');
 
 const getChallenges = async (req, res) => {
     try {
-        const challenges = await Challenge.find({ released: true });
+        let challenges;
+
+        if(req.user.role === 'admin') {
+            challenges = await Challenge.find();
+        } else {
+           challenges = await Challenge.find({ released: true });
+        }
+        
         res.json(challenges);
     } catch (error) {
         res.status(500).json({ message: error.message });
