@@ -35,10 +35,11 @@ const loginUser = async (req, res) => {
         if (!password) return res.status(400).json({ message: 'Please provide password'});
 
         const normalizeEmail = valid.normalizeEmail(email);
-        const sanitizedPassword = valid.escape(password);
-
-        const user = await User.findOne({ normalizeEmail });
-        if (user && (await bcrypt.compare(sanitizedPassword, user.password))) {
+        console.log(normalizeEmail);
+        
+        const user = await User.findOne({ email: normalizeEmail });
+        console.log(user);
+        if (user && (await bcrypt.compare(password, user.password))) {
             res.json({ id: user.id, name: user.name, email: user.email, token: generateToken(user.id), role: user.role });
         } else {
             res.status(401).json({ message: 'Invalid email or password' });
