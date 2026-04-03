@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import ChallengeView from './components/ChallengeView';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
-import Tasks from './pages/Tasks';
+import Challenges from './pages/Challenges';
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/tasks" element={<Tasks />} />
+        <Route path="/challenges" element={<Challenges />} />
+        <Route path="/challenges/:id" element={<ChallengeView/>} />
       </Routes>
     </Router>
   );
