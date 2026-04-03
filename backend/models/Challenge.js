@@ -9,8 +9,8 @@ const challengeSchema = new mongoose.Schema({
     constraints: {type: String, default: null },
     sampleSolution: { type: String},
     unitTestSet: { type: String, required: true },
-    difficulty: { type: String, enum: ['easy','medium','hard'], required: true },
-    category: { type: String, enum: ['data structure', 'algorithm'], required: true },
+    difficulty: { type: String, enum: ['Easy','Medium','Hard'], required: true },
+    category: { type: String, enum: ['Data structure', 'Algorithm'], required: true },
     releaseDate: { type: Date, required: true},
     released: {type: Boolean}
 });

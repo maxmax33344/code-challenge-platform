@@ -48,55 +48,55 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 shadow-md rounded mb-6">
+    <form onSubmit={handleSubmit} className="bg-[#03346E] text-[#E2E2B6] p-6 shadow-lg rounded-xl mb-6">
       <h1 className="text-2xl font-bold mb-4">{editingChallenge ? 'Edit Existing Challenge' : 'Create New Challenge'}</h1>
       <input
         type="text"
         placeholder="Name"
         value={formData.name}
         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <textarea
         placeholder="Enter challenge description"
         value={formData.description}
         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <textarea
         placeholder="Enter example"
         value={formData.example}
         onChange={(e) => setFormData({ ...formData, example: e.target.value })}
-        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <textarea
         placeholder="Enter sample input set"
         value={formData.sampleInputSet}
         onChange={(e) => setFormData({ ...formData, sampleInputSet: e.target.value })}
-        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <textarea
         placeholder="Enter sample output set"
         value={formData.sampleOutputSet}
         onChange={(e) => setFormData({ ...formData, sampleOutputSet: e.target.value })}
-        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <textarea
         placeholder="Enter constraints"
         value={formData.constraints}
         onChange={(e) => setFormData({ ...formData, constraints: e.target.value })}
-        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <textarea
         placeholder="Enter unit test"
         value={formData.unitTestSet}
         onChange={(e) => setFormData({ ...formData, unitTestSet: e.target.value })}
-        className="w-full mb-4 px-4 py-3 border border-gray-300 rounded-lg h-32 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+        className="w-full mb-4 px-4 py-3 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6EACDA]"
       />
       <select
         value={formData.difficulty}
         onChange={(e) => setFormData({ ...formData, difficulty: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
+        className="w-full mb-4 p-2 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded focus:outline-none"
       >
         <option value="">Select Difficulty</option>
         <option value="Easy">Easy</option>
@@ -106,20 +106,20 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
       <select
         value={formData.category}
         onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
+        className="w-full mb-4 p-2 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded focus:outline-none"
       >
         <option value="">Select Category</option>
-        <option value="Data structure">data structure</option>
-        <option value="Algorithm">algorithm</option>
+        <option value="Data structure">Data structure</option>
+        <option value="Algorithm">Algorithm</option>
       </select>
       <input
         type="date"
         value={formData.releaseDate}
         onChange={(e) => setFormData({ ...formData, releaseDate: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
+        className="w-full mb-4 p-2 bg-[#021526] border border-[#6EACDA] text-[#E2E2B6] rounded"
       />      
       
-      <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
+      <button type="submit" className="w-full bg-[#6EACDA] text-[#021526] font-semibold p-2 rounded-lg hover:opacity-90 transition">
         {editingChallenge ? 'Update' : 'Create'}
       </button>
     </form>

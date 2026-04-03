@@ -11,26 +11,26 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center">
-      <Link to="/" className="text-2xl font-bold">Your apps name</Link>
-      <div>
+    <nav className="bg-[#03346E] text-[#E2E2B6] px-6 py-4 flex justify-between items-center shadow">
+      <Link to="/" className="text-2xl font-bold text-[#E2E2B6]">Coding Challenge Platform</Link>
+      <div className="flex items-center gap-4">
         {user ? (
           <>
-            <Link to="/challenges" className="mr-4">CRUD</Link>
-            <Link to="/profile" className="mr-4">Profile</Link>
+            <Link to="/challenges" className="hover:text-[#6EACDA] transition">Challenges</Link>
+            <Link to="/profile" className="hover:text-[#6EACDA] transition">Profile</Link>
             <button
               onClick={handleLogout}
-              className="bg-red-500 px-4 py-2 rounded hover:bg-red-700"
+              className="bg-[#6EACDA] text-[#021526] px-4 py-2 rounded hover:bg-[#E2E2B6] transition"
             >
               Logout
             </button>
           </>
         ) : (
           <>
-            <Link to="/login" className="mr-4">Login</Link>
+            <Link to="/login" className="hover:text-[#6EACDA] transition">Login</Link>
             <Link
               to="/register"
-              className="bg-green-500 px-4 py-2 rounded hover:bg-green-700"
+              className="bg-[#6EACDA] text-[#021526] px-4 py-2 rounded hover:bg-[#E2E2B6] transition"
             >
               Register
             </Link>
