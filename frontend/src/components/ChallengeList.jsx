@@ -1,8 +1,10 @@
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 const ChallengeList = ({ challenges, setChallenges, setEditingChallenge }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleDelete = async (challengeId) => {
     try {
@@ -28,6 +30,21 @@ const ChallengeList = ({ challenges, setChallenges, setEditingChallenge }) => {
     }
   }; 
 
+  const handleView = async (challengeId) => {
+    try {
+      console.log(challengeId);
+      const challenge = challenges.find(c => c._id === challengeId);
+      if (!challenge) return;
+      if (!challenge.released && user.role !== 'admin'){
+        alert('This challenge is not released yet.');
+        return;
+      }
+      navigate(`/challenges/${challengeId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  }; 
+
   return (
     <div>
       {challenges.map((challenge) => (
@@ -37,7 +54,7 @@ const ChallengeList = ({ challenges, setChallenges, setEditingChallenge }) => {
           <p className="text-sm text-gray-500">ReleaseDate: {new Date(challenge.releaseDate).toLocaleDateString()}</p>
           <div className="mt-2 flex gap-3">
             <button
-              onClick={() => handleHide(challenge._id)}
+              onClick={() => handleView(challenge._id)}
               className="bg-orange-500 text-white px-4 py-2 rounded"
             >
               View

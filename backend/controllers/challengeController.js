@@ -16,6 +16,16 @@ const getChallenges = async (req, res) => {
     }
 };
 
+const getChallengeById = async (req, res) => {
+    try {
+        const challenge = await Challenge.findById(req.params.id);
+        if (!challenge) return res.status(404).json({ message: 'Challenge not found' });
+        res.json(challenge);
+    } catch (error){
+        res.status(500).json({message: error.message});
+    }
+}
+
 const addChallenge = async (req, res) => {
     const { name, description, example, sampleInputSet, sampleOutputSet, constraints, unitTestSet, difficulty, category, releaseDate } = req.body;
     const today = new Date();
@@ -89,4 +99,4 @@ const hideChallenge = async (req, res) => {
 
 
 
-module.exports = { getChallenges, addChallenge, updateChallenge, deleteChallenge, hideChallenge };
+module.exports = { getChallenges, addChallenge, updateChallenge, deleteChallenge, hideChallenge, getChallengeById};

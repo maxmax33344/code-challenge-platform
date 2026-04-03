@@ -99,9 +99,9 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
         className="w-full mb-4 p-2 border rounded"
       >
         <option value="">Select Difficulty</option>
-        <option value="easy">Easy</option>
-        <option value="medium">Medium</option>
-        <option value="hard">Hard</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
       </select>
       <select
         value={formData.category}
@@ -109,8 +109,8 @@ const ChallengeForm = ({ challenges, setChallenges, editingChallenge, setEditing
         className="w-full mb-4 p-2 border rounded"
       >
         <option value="">Select Category</option>
-        <option value="data structure">data structure</option>
-        <option value="algorithm">algorithm</option>
+        <option value="Data structure">data structure</option>
+        <option value="Algorithm">algorithm</option>
       </select>
       <input
         type="date"
