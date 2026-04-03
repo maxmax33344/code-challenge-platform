@@ -37,23 +37,33 @@ const ChallengeList = ({ challenges, setChallenges, setEditingChallenge }) => {
           <p className="text-sm text-gray-500">ReleaseDate: {new Date(challenge.releaseDate).toLocaleDateString()}</p>
           <div className="mt-2 flex gap-3">
             <button
-              onClick={() => setEditingChallenge(challenge)}
-              className="bg-yellow-500 text-white px-4 py-2 rounded"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(challenge._id)}
-              className="bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Delete
-            </button>
-            <button
               onClick={() => handleHide(challenge._id)}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className="bg-orange-500 text-white px-4 py-2 rounded"
             >
-              Hide
-            </button>          
+              View
+            </button>
+            {user?.role === 'admin' && (  
+              <>
+                <button
+                  onClick={() => setEditingChallenge(challenge)}
+                  className="bg-yellow-500 text-white px-4 py-2 rounded"
+                >
+                  Edit
+                </button>
+                <button
+                  onClick={() => handleDelete(challenge._id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded"
+                >
+                  Delete
+                </button>
+                <button
+                  onClick={() => handleHide(challenge._id)}
+                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  Hide
+                </button>
+              </>
+            )}          
           </div>
         </div>
       ))}
