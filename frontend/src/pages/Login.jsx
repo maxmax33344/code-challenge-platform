@@ -7,12 +7,12 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const { login } = useAuth();
   const navigate = useNavigate();
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axiosInstance.post('/api/auth/login', formData);
-      login(response.data);
+      login(response.data, response.data.token);
       navigate('/challenges');
     } catch (error) {
       //alert('Login failed. Please try again.');

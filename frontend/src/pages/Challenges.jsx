@@ -12,17 +12,17 @@ const Challenges = () => {
   useEffect(() => {
     const fetchChallenges = async () => {
       try {
-        const response = await axiosInstance.get('/api/challenges', {
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
+        const response = await axiosInstance.get('/api/challenges');
         setChallenges(response.data);
       } catch (error) {
+        console.log(error);
         alert('Failed to fetch challenges.');
       }
     };
-
-    fetchChallenges();
-  }, [user]);
+    if (user) {
+      fetchChallenges();
+    }
+}, [user]);
 
   return (
     <div className="container mx-auto p-6">
